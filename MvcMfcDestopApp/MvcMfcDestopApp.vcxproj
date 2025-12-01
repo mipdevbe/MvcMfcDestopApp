@@ -183,7 +183,13 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Controller.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="INotifyPropertyChanged.h" />
+    <ClInclude Include="Observable.h" />
+    <ClInclude Include="PropertyChangedEventArgs.h" />
+    <ClInclude Include="IView.h" />
+    <ClInclude Include="Header1.h" />
     <ClInclude Include="MvcMfcDestopApp.h" />
     <ClInclude Include="MvcMfcDestopAppDlg.h" />
     <ClInclude Include="pch.h" />

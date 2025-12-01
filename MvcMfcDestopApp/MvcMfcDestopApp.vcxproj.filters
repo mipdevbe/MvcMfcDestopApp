@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{c5a8f9ca-41a6-44f9-a1ac-f15e10c00927}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{8a3ae584-e1cb-411c-b0cb-4369764a832e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="View">
+      <UniqueIdentifier>{598226b2-c90b-41ce-96d9-e0f3bc6ce596}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enums">
+      <UniqueIdentifier>{11de09f5-19c6-47eb-9ef9-6b802ba4846f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MvcMfcDestopApp.h">
@@ -32,6 +44,24 @@
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IView.h">
+      <Filter>View</Filter>
+    </ClInclude>
+    <ClInclude Include="Header1.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyChangedEventArgs.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="INotifyPropertyChanged.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Observable.h">
+      <Filter>Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

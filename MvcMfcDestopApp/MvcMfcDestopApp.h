@@ -9,7 +9,8 @@
 #endif
 
 #include "resource.h"		// main symbols
-
+#include <memory>
+#include "Controller.h"
 
 // CMvcMfcDestopAppApp:
 // See MvcMfcDestopApp.cpp for the implementation of this class
@@ -24,9 +25,24 @@ public:
 public:
 	virtual BOOL InitInstance();
 
+// Features
+// 
+    const std::shared_ptr<Controller> GetController() const
+    {
+        if (_controller != nullptr)
+            return _controller;
+
+        _controller = std::make_shared<Controller>();
+        return _controller;
+    }
+
 // Implementation
 
+
 	DECLARE_MESSAGE_MAP()
+
+private:
+	std::shared_ptr<Controller> _controller{ nullptr };
 };
 
 extern CMvcMfcDestopAppApp theApp;
