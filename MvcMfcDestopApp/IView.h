@@ -2,7 +2,7 @@
 
 class IView {
 public:
-    virtual ~IView() = default; // Virtual destructor for proper cleanup
+    virtual ~IView() {} // Virtual destructor for proper cleanup
 
     virtual void Create() = 0; // Pure virtual method
     virtual void Load() = 0;   // Pure virtual method

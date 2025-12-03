@@ -189,7 +189,7 @@
     <ClInclude Include="Observable.h" />
     <ClInclude Include="PropertyChangedEventArgs.h" />
     <ClInclude Include="IView.h" />
-    <ClInclude Include="Header1.h" />
+    <ClInclude Include="MvcEnums.h" />
     <ClInclude Include="MvcMfcDestopApp.h" />
     <ClInclude Include="MvcMfcDestopAppDlg.h" />
     <ClInclude Include="pch.h" />

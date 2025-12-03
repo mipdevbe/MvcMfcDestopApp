@@ -3,19 +3,29 @@
 #include <typeindex>
 #include <unordered_map>
 #include <iostream>
-#include <any>
 #include "IView.h"
 #include "Observable.h"
 
 class Controller : public Observable, public INotifyPropertyChanged
 {
 public:
-    Controller() = default;
+    Controller() 
+    {
+    }
+
+    virtual ~Controller() 
+    {
+    }
+
+    template <typename T>
+    void CheckIsViewType(T type) {
+        static_assert(std::is_base_of<IView, T>::value, "T must be derived from IView.");
+    }
 
     template <typename T>
     bool RegisterView() {
 
-        static_assert(std::is_base_of<IView, T>::value, "T must be derived from IView.");
+        CheckIsViewType(T);
 
         std::type_index typeIndex(typeid(T));
         auto it = views.find(typeIndex);
@@ -29,7 +39,8 @@ public:
 
     template <typename T>
     bool UnregisterView() {
-        static_assert(std::is_base_of<IView, T>::value, "T must be derived from IView.");
+
+        CheckIsViewType(T);
 
         std::type_index typeIndex(typeid(T));
         if (views.erase(typeIndex) > 0) 
@@ -39,9 +50,9 @@ public:
     }
 
     template <typename T>
-    const std::shared_ptr<IView> View() const 
-    {
-        static_assert(std::is_base_of<IView, T>::value, "T must be derived from IView.");
+    const std::shared_ptr<IView> View() const {
+
+        CheckIsViewType(T);
 
         std::type_index typeIndex(typeid(T));
         auto it = views.find(typeIndex);
@@ -53,6 +64,7 @@ public:
         return newInstance;
     }
 
+    // async ??
     bool Load() {
         return true;
     }
@@ -63,6 +75,11 @@ public:
 
     bool Close() {
         return true;
+    }
+
+    void PropertyChanged(const PropertyChangedEventArgs& args)
+    {
+
     }
 
 private:

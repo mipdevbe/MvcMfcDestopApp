@@ -16,6 +16,8 @@
 // See MvcMfcDestopApp.cpp for the implementation of this class
 //
 
+using namespace std;
+
 class CMvcMfcDestopAppApp : public CWinApp
 {
 public:
@@ -27,12 +29,12 @@ public:
 
 // Features
 // 
-    const std::shared_ptr<Controller> GetController() const
+    std::shared_ptr<Controller> GetController()
     {
         if (_controller != nullptr)
             return _controller;
 
-        _controller = std::make_shared<Controller>();
+        _controller = make_shared<Controller>();
         return _controller;
     }
 
@@ -42,7 +44,7 @@ public:
 	DECLARE_MESSAGE_MAP()
 
 private:
-	std::shared_ptr<Controller> _controller{ nullptr };
+    shared_ptr<Controller> _controller{ nullptr };
 };
 
 extern CMvcMfcDestopAppApp theApp;
