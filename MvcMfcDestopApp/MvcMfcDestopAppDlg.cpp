@@ -160,28 +160,20 @@ HCURSOR CMvcMfcDestopAppDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CMvcMfcDestopAppDlg::Create()
+void CMvcMfcDestopAppDlg::CreateView()
 {
-
 }
 
-void CMvcMfcDestopAppDlg::Load()
+void CMvcMfcDestopAppDlg::LoadView()
 {
-
 }
 
-bool CMvcMfcDestopAppDlg::Update() 
+void CMvcMfcDestopAppDlg::UpdateView()
 {
-
-	return false;
+	AfxMessageBox(_T("UpdateView called"));
 }
 
-bool CMvcMfcDestopAppDlg::Close()
+void CMvcMfcDestopAppDlg::CloseView()
 {
-	return false;
-}
 
-bool CMvcMfcDestopAppDlg::IsClosed() const
-{
-	return false;
 }

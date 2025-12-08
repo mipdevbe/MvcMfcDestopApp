@@ -72,14 +72,14 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-	std::shared_ptr<CMvcMfcDestopAppDlg> dlg = std::make_shared<CMvcMfcDestopAppDlg>(); // View
+	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>(static_cast<CWnd*>(nullptr));
 
 	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Initialize();
-	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(std::move(dlg));
+	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(dlg);
 
-	auto dltPtr = static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().View<CMvcMfcDestopAppDlg>();
-	m_pMainWnd = static_cast<CMvcMfcDestopAppDlg*>(dltPtr.get());
+	m_pMainWnd = static_cast<CMvcMfcDestopAppDlg*>(dlg.get());
 	INT_PTR nResponse = dlg->DoModal();
+
 	if (nResponse == IDOK)
 	{
 		// TODO: Place code here to handle when the dialog is

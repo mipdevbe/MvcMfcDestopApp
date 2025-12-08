@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include <typeindex>
-#include <unordered_map>
+#include <map>
 #include "..\View\IView.h"
 #include "..\Model\IModel.h"
 
@@ -26,8 +26,8 @@ public:
         //static_assert(std::is_base_of<IModel, T>::value, "T must be derived from IModel.");
     }
 
-    template <typename T>
-    void registerView(std::shared_ptr<IView>&& view = nullptr) 
+    template <class T>
+    void registerView(std::shared_ptr<IView>& view)
     {
         //CheckIsViewType(T);
 
@@ -37,22 +37,22 @@ public:
             views[typeViewIndex] = view;
     }
 
-    template <typename T>
-    const std::shared_ptr<IView> View() {
+    template <class T>
+    const std::shared_ptr<IView> View() const{
 
         //CheckIsViewType(T);
+		std::shared_ptr<IView> result = nullptr;
 
         std::type_index typeIndex(typeid(T));
         auto it = views.find(typeIndex);
         if (it != views.end() && it->second != nullptr)
-            return it->second;
+            result = it->second;
 
-        auto newInstance = std::make_shared<T>(this);
-        views[typeIndex] = newInstance;
-        return newInstance;
+      
+        return result;
     }
 
-    template <typename T>
+    template <class T>
     void registerModel() {
 
        // CheckIsModelType(T);
@@ -89,8 +89,8 @@ protected:
     }
 
 private:
-    std::unordered_map<std::type_index, std::shared_ptr<IView>> views;
-    std::unordered_map<std::type_index, std::shared_ptr<IModel>> models;
+    std::map<std::type_index, std::shared_ptr<IView>> views;
+    std::map<std::type_index, std::shared_ptr<IModel>> models;
 };
 
 

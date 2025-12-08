@@ -23,11 +23,11 @@ public:
 	}
 
 	// async ??
-	virtual bool Load() override
+	bool Load() override
 	{
-		_companiesModel.Load(); // --> should fire to the ui.
+		_companiesModel.Load();
+		View<CMvcMfcDestopAppDlg>()->UpdateView();
 
-		View<CMvcMfcDestopAppDlg>()->Update();
 		return true;
 	}
 

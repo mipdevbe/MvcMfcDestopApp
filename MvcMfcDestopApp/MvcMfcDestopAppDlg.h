@@ -36,9 +36,8 @@ protected:
 
 	// IView interface
 public:
-	void Create() override;
-	void Load() override;
-	bool Update() override;
-	bool Close() override;
-	bool IsClosed() const override;
+	void CreateView(); // Pure virtual method
+	void LoadView(); // Pure virtual method
+	void UpdateView(); // Pure virtual method
+	void CloseView(); // Pure virtual method
 };
