@@ -5,6 +5,7 @@
 #pragma once
 #include <memory>
 #include ".\View\IView.h"
+#include ".\Model\IModel.h"
 
 // CMvcMfcDestopAppDlg dialog
 class CMvcMfcDestopAppDlg : public CDialogEx, public IView
@@ -36,8 +37,9 @@ protected:
 
 	// IView interface
 public:
-	void CreateView(); // Pure virtual method
-	void LoadView(); // Pure virtual method
-	void UpdateView(); // Pure virtual method
-	void CloseView(); // Pure virtual method
+	void CreateView() override; // Pure virtual method
+	void LoadView() override; // Pure virtual method
+	void UpdateView(const std::vector<std::shared_ptr<IModel>> & data) override; // Pure virtual method
+	void CloseView() override; // Pure virtual method
+	CListBox _lstCompanies;
 };

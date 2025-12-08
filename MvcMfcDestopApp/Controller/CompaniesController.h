@@ -15,32 +15,27 @@ public:
 	{
 	}
 
-	bool Initialize() override
+	void Initialize() override
 	{
-		registerModel<CompaniesModel>();
-
-		return true;
 	}
 
 	// async ??
-	bool Load() override
+	void Load() override
 	{
 		_companiesModel.Load();
-		View<CMvcMfcDestopAppDlg>()->UpdateView();
+		auto view = View<CMvcMfcDestopAppDlg>(); // existing helper that returns shared_ptr<IView>
+		if (view) view->UpdateView(_companiesModel.getData());
 
-		return true;
 	}
 
-	bool Update() override
+	void Update() override
 	{
 		// Implementation of Update
-		return true;
 	}
 
-	bool Close() override
+	void Close() override
 	{
 		// Implementation of Close
-		return true;
 	}
 
 private:

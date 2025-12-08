@@ -73,9 +73,9 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
 	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>(static_cast<CWnd*>(nullptr));
+	auto iview = std::static_pointer_cast<IView>(dlg);  // create lvalue of correct type
+	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(iview);
 
-	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Initialize();
-	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(dlg);
 
 	m_pMainWnd = static_cast<CMvcMfcDestopAppDlg*>(dlg.get());
 	INT_PTR nResponse = dlg->DoModal();

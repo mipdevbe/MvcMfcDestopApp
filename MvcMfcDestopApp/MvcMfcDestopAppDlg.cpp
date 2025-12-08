@@ -59,6 +59,7 @@ CMvcMfcDestopAppDlg::CMvcMfcDestopAppDlg(CWnd* pParent /*=nullptr*/)
 void CMvcMfcDestopAppDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LST_CATEGORIES, _lstCompanies);
 }
 
 BEGIN_MESSAGE_MAP(CMvcMfcDestopAppDlg, CDialogEx)
@@ -160,20 +161,30 @@ HCURSOR CMvcMfcDestopAppDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CMvcMfcDestopAppDlg::CreateView()
+void CMvcMfcDestopAppDlg::CreateView() 
 {
 }
 
-void CMvcMfcDestopAppDlg::LoadView()
+void CMvcMfcDestopAppDlg::LoadView() 
 {
 }
 
-void CMvcMfcDestopAppDlg::UpdateView()
+void CMvcMfcDestopAppDlg::UpdateView(const std::vector<std::shared_ptr<IModel>>& data)
 {
+	_lstCompanies.ResetContent();
+
+	for (const auto& item : data)
+	{
+		const auto& company = static_pointer_cast<CompanyModel>(item);
+		if (!company) continue;
+
+		_lstCompanies.AddString(company->getName().c_str());
+	}
+
 	AfxMessageBox(_T("UpdateView called"));
 }
 
-void CMvcMfcDestopAppDlg::CloseView()
+void CMvcMfcDestopAppDlg::CloseView() 
 {
 
 }

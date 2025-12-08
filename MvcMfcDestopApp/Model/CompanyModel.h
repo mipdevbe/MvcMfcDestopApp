@@ -7,7 +7,7 @@ class CompanyModel : public IModel
 public: 
 
 	CompanyModel::CompanyModel(int id, const std::string& name)
-		: id(id), name(name) {
+		: id(id), name(name) , IModel() {
 	}
 
 	virtual CompanyModel::~CompanyModel() {
