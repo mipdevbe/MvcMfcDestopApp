@@ -10,7 +10,7 @@
 
 #include "resource.h"		// main symbols
 #include <memory>
-#include "Controller.h"
+#include ".\Controller\Controllers.h"
 
 // CMvcMfcDestopAppApp:
 // See MvcMfcDestopApp.cpp for the implementation of this class
@@ -29,22 +29,17 @@ public:
 
 // Features
 // 
-    std::shared_ptr<Controller> GetController()
-    {
-        if (_controller != nullptr)
-            return _controller;
-
-        _controller = make_shared<Controller>();
-        return _controller;
+    template <typename C>
+    const Controllers& Controller() const {
+		return _controllers.Controller<C>();
     }
 
 // Implementation
 
-
 	DECLARE_MESSAGE_MAP()
 
 private:
-    shared_ptr<Controller> _controller{ nullptr };
+    Controllers _controllers;
 };
 
 extern CMvcMfcDestopAppApp theApp;

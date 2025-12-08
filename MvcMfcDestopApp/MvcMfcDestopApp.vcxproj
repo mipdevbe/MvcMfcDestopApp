@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -183,20 +183,30 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Controller.h" />
+    <ClInclude Include="Controller\CompanyController.h" />
+    <ClInclude Include="Controller\Controllers.h" />
+    <ClInclude Include="Controller\EmployeeController.h" />
+    <ClInclude Include="Controller\IControler.h" />
+    <ClInclude Include="Controller\LeaveController.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="INotifyPropertyChanged.h" />
-    <ClInclude Include="Observable.h" />
-    <ClInclude Include="PropertyChangedEventArgs.h" />
-    <ClInclude Include="IView.h" />
-    <ClInclude Include="MvcEnums.h" />
+    <ClInclude Include="Model\CompaniesModel.h" />
+    <ClInclude Include="Model\CompanyModel.h" />
+    <ClInclude Include="Model\EmployeeModel.h" />
+    <ClInclude Include="Model\EmployeesModel.h" />
+    <ClInclude Include="Model\IModel.h" />
+    <ClInclude Include="Model\LeaveModel.h" />
+    <ClInclude Include="Model\LeavesModel.h" />
     <ClInclude Include="MvcMfcDestopApp.h" />
     <ClInclude Include="MvcMfcDestopAppDlg.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="View\IView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Model\CompaniesModel.cpp" />
+    <ClCompile Include="Model\CompanyModel.cpp" />
+    <ClCompile Include="Model\EmployeesModel.cpp" />
     <ClCompile Include="MvcMfcDestopApp.cpp" />
     <ClCompile Include="MvcMfcDestopAppDlg.cpp" />
     <ClCompile Include="pch.cpp">

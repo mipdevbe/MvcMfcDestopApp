@@ -45,22 +45,43 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IView.h">
+    <ClInclude Include="Model\CompaniesModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\CompanyModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\EmployeeModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\EmployeesModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\LeaveModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\LeavesModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="View\IView.h">
       <Filter>View</Filter>
     </ClInclude>
-    <ClInclude Include="MvcEnums.h">
-      <Filter>Enums</Filter>
+    <ClInclude Include="Model\IModel.h">
+      <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="Controller.h">
+    <ClInclude Include="Controller\IControler.h">
       <Filter>Controller</Filter>
     </ClInclude>
-    <ClInclude Include="PropertyChangedEventArgs.h">
+    <ClInclude Include="Controller\Controllers.h">
       <Filter>Controller</Filter>
     </ClInclude>
-    <ClInclude Include="INotifyPropertyChanged.h">
+    <ClInclude Include="Controller\CompanyController.h">
       <Filter>Controller</Filter>
     </ClInclude>
-    <ClInclude Include="Observable.h">
+    <ClInclude Include="Controller\EmployeeController.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller\LeaveController.h">
       <Filter>Controller</Filter>
     </ClInclude>
   </ItemGroup>
@@ -73,6 +94,15 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\CompaniesModel.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\CompanyModel.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\EmployeesModel.cpp">
+      <Filter>Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
