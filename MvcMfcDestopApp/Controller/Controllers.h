@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "../Controller/CompaniesController.h"
-#include "../Controller/EmployeeController.h"
+#include "../Controller/EmployeesController.h"
 #include "../Controller/LeaveController.h"
 
 #include <typeindex>
@@ -26,16 +26,16 @@ public:
 		return _companiesController;
 	}
 
-	const EmployeeController& Employee() const {
-		return _employeeController;
+	EmployeesController& Employees() {
+		return _employeesController;
 	}
 
-	const LeaveController& Leave() const {
+	LeaveController& Leave() {
 		return _leaveController;
 	}
 
 private:
 	CompaniesController _companiesController;
-    EmployeeController _employeeController;
+    EmployeesController _employeesController;
     LeaveController _leaveController;
 };

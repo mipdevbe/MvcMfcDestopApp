@@ -185,13 +185,14 @@
   <ItemGroup>
     <ClInclude Include="Controller\CompaniesController.h" />
     <ClInclude Include="Controller\Controllers.h" />
-    <ClInclude Include="Controller\EmployeeController.h" />
+    <ClInclude Include="Controller\EmployeesController.h" />
     <ClInclude Include="Controller\IControler.h" />
     <ClInclude Include="Controller\LeaveController.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Model\CompanyModel.h" />
     <ClInclude Include="Model\CompaniesModel.h" />
     <ClInclude Include="Model\EmployeeModel.h" />
+    <ClInclude Include="Model\EmployeesModel.h" />
     <ClInclude Include="Model\IModel.h" />
     <ClInclude Include="Model\LeaveModel.h" />
     <ClInclude Include="MvcMfcDestopApp.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="View\EmployeeView.h" />
     <ClInclude Include="View\IView.h" />
   </ItemGroup>
   <ItemGroup>

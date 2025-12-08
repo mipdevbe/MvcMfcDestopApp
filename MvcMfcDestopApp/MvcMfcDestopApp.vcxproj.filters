@@ -69,7 +69,7 @@
     <ClInclude Include="Controller\CompaniesController.h">
       <Filter>Controller</Filter>
     </ClInclude>
-    <ClInclude Include="Controller\EmployeeController.h">
+    <ClInclude Include="Controller\EmployeesController.h">
       <Filter>Controller</Filter>
     </ClInclude>
     <ClInclude Include="Controller\LeaveController.h">
@@ -77,6 +77,12 @@
     </ClInclude>
     <ClInclude Include="Model\CompaniesModel.h">
       <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\EmployeesModel.h">
+      <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="View\EmployeeView.h">
+      <Filter>View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

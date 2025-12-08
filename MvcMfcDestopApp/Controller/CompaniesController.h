@@ -1,4 +1,5 @@
 #pragma once
+#include <functional>
 #include "../Controller/IControler.h"
 #include "../Model/CompaniesModel.h"
 #include "../MvcMfcDestopAppDlg.h"
@@ -24,7 +25,6 @@ public:
 	{
 		_companiesModel.Load();
 		auto view = View<CMvcMfcDestopAppDlg>(); // existing helper that returns shared_ptr<IView>
-		if (view) view->UpdateView(_companiesModel.getData());
 
 	}
 

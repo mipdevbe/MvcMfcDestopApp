@@ -7,14 +7,16 @@ class EmployeeModel : public IModel
 {
 public:
 
-	EmployeeModel(int id, const std::string& name);
-	virtual ~EmployeeModel();
+	EmployeeModel(int id, int companyId, const std::string& name) : _id(id), _companyId(companyId), _name(name) {}
+	virtual ~EmployeeModel() {}
 
-	int getId() const;
-	const std::string& getName() const;
+	int getId() const { return _id; }
+	int getCompanyId() const { return _companyId; }
+	const std::string& getName() const { return _name; }
 
 private:
-	int id;
-	std::string name;
+	int _id;
+	int _companyId;
+	std::string _name;
 
 };

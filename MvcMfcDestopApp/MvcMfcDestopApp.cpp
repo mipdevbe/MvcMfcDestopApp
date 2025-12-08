@@ -6,6 +6,7 @@
 #include "framework.h"
 #include "MvcMfcDestopApp.h"
 #include "MvcMfcDestopAppDlg.h"
+#include "./View/EmployeeView.h"
 #include <memory>
 
 #ifdef _DEBUG
@@ -72,10 +73,13 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>(static_cast<CWnd*>(nullptr));
+	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>();
 	auto iview = std::static_pointer_cast<IView>(dlg);  // create lvalue of correct type
 	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(iview);
 
+	auto employeeView = std::make_shared<EmployeeView>();
+	auto iviewEmployee = std::static_pointer_cast<IView>(employeeView);  // create lvalue of correct type
+	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().registerView<EmployeeView>(iviewEmployee);
 
 	m_pMainWnd = static_cast<CMvcMfcDestopAppDlg*>(dlg.get());
 	INT_PTR nResponse = dlg->DoModal();

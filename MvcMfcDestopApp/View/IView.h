@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <functional>
 #include "../Model/IModel.h"
 
 class IView 
@@ -10,6 +11,5 @@ public:
 
     virtual void CreateView() = 0; // Pure virtual method
     virtual void LoadView() = 0; // Pure virtual method
-    virtual void UpdateView(const std::vector< std::shared_ptr<IModel>>& data) = 0; // Pure virtual method
     virtual void CloseView() = 0; // Pure virtual method
 };

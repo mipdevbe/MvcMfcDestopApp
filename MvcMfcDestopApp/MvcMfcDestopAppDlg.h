@@ -1,4 +1,3 @@
-
 // MvcMfcDestopAppDlg.h : header file
 //
 
@@ -10,6 +9,10 @@
 // CMvcMfcDestopAppDlg dialog
 class CMvcMfcDestopAppDlg : public CDialogEx, public IView
 {
+private:
+	CListBox _lstCompanies;
+	CListBox _lstEmployees;
+
 // Construction
 public:
 	CMvcMfcDestopAppDlg(CWnd* pParent = nullptr);	// standard constructor
@@ -37,9 +40,9 @@ protected:
 
 	// IView interface
 public:
-	void CreateView() override; // Pure virtual method
-	void LoadView() override; // Pure virtual method
-	void UpdateView(const std::vector<std::shared_ptr<IModel>> & data) override; // Pure virtual method
-	void CloseView() override; // Pure virtual method
-	CListBox _lstCompanies;
+	void CreateView() override; 
+	void UpdateEmployeesView(const std::vector<std::shared_ptr<IModel>>& data);
+
+	void CloseView() override;
+
 };
