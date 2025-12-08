@@ -11,6 +11,8 @@ public:
 
 	void Load() {
 		// Simulate loading data
+		_models.clear();
+
 		_models.emplace_back(std::make_shared<CompanyModel>(1, "TechCorp"));
 		_models.emplace_back(std::make_shared<CompanyModel>(2, "BizSolutions"));
 		_models.emplace_back(std::make_shared<CompanyModel>(3, "InnovateLtd"));

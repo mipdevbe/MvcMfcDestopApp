@@ -67,6 +67,7 @@ BEGIN_MESSAGE_MAP(CMvcMfcDestopAppDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_LBN_SELCHANGE(IDC_LST_CATEGORIES, &CMvcMfcDestopAppDlg::OnSelchangeLstCategories)
 END_MESSAGE_MAP()
 
 
@@ -205,4 +206,10 @@ void CMvcMfcDestopAppDlg::UpdateView(const std::vector<std::shared_ptr<IModel>>&
 void CMvcMfcDestopAppDlg::CloseView()
 {
 
+}
+
+void CMvcMfcDestopAppDlg::OnSelchangeLstCategories()
+{
+	int currentSelection = _lstCompanies.GetCurSel()+ 1;
+	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().Load(currentSelection);
 }

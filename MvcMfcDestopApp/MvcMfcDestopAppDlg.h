@@ -44,4 +44,5 @@ public:
 	void LoadView() override;
 	void UpdateView(const std::vector<std::shared_ptr<IModel>>& data) override; // Pure virtual method
 	void CloseView() override; // Pure virtual method
+	afx_msg void OnSelchangeLstCategories();
 };
