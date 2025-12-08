@@ -20,15 +20,15 @@ class CAboutDlg : public CDialogEx
 public:
 	CAboutDlg();
 
-// Dialog Data
+	// Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_ABOUTBOX };
 #endif
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 
-// Implementation
+	// Implementation
 protected:
 	DECLARE_MESSAGE_MAP()
 };
@@ -59,7 +59,7 @@ CMvcMfcDestopAppDlg::CMvcMfcDestopAppDlg(CWnd* pParent /*=nullptr*/)
 void CMvcMfcDestopAppDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_LST_CATEGORIES, _lstCompanies);	
+	DDX_Control(pDX, IDC_LST_CATEGORIES, _lstCompanies);
 	DDX_Control(pDX, IDC_LST_ITEMS, _lstEmployees);
 }
 
@@ -89,18 +89,18 @@ BOOL CMvcMfcDestopAppDlg::OnInitDialog()
 	// Initialize Views
 	//-------------------------------- ----------------
 	auto iview = static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().View<EmployeeView>();
-	auto employeeView = std::static_pointer_cast<EmployeeView>(iview); 
-	employeeView.setUpdateCallback([this](const std::vector<std::shared_ptr<IModel>>& data)
-	{
-		// Update Employees List Box
-		_lstEmployees.ResetContent();
-		for (const auto& item : data) {
-			auto employee = std::dynamic_pointer_cast<EmployeeModel>(item);
-			if (!employee) continue;
-			CString name(employee->getName().c_str());
-			_lstEmployees.AddString(name);
-		}
-	});
+	auto employeeView = std::static_pointer_cast<EmployeeView>(iview);
+	employeeView->setUpdateCallback([this](const std::vector<std::shared_ptr<IModel>>& data)
+		{
+			// Update Employees List Box
+			_lstEmployees.ResetContent();
+			for (const auto& item : data) {
+				auto employee = std::dynamic_pointer_cast<EmployeeModel>(item);
+				if (!employee) continue;
+				CString name(employee->getName().c_str());
+				_lstEmployees.AddString(name);
+			}
+		});
 
 	// 
 	// Add "About..." menu item to system menu.
@@ -182,35 +182,27 @@ HCURSOR CMvcMfcDestopAppDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-void CMvcMfcDestopAppDlg::CreateView() 
+void CMvcMfcDestopAppDlg::CreateView()
 {
 }
 
-void CMvcMfcDestopAppDlg::LoadView() 
+void CMvcMfcDestopAppDlg::LoadView()
 {
 }
 
-void CMvcMfcDestopAppDlg::UpdateView(const std::vector<std::shared_ptr<IModel>>& data,
-	const std::function<void(const std::vector<std::shared_ptr<IModel>>&)>& callback) 
+void CMvcMfcDestopAppDlg::UpdateView(const std::vector<std::shared_ptr<IModel>>& data)
 {
 	// Populate company list
 	_lstCompanies.ResetContent();
-	for (const auto & item : data) {
+	for (const auto& item : data) {
 		auto company = std::dynamic_pointer_cast<CompanyModel>(item);
 		if (!company) continue;
 		CString name(company->getName().c_str());
 		_lstCompanies.AddString(name);
 	}
-
-	// Example: call the callback to notify main dialog or controller
-	if (callback) {
-		callback(data);
-	}
-
-	AfxMessageBox(_T("UpdateView called"));
 }
 
-void CMvcMfcDestopAppDlg::CloseView() 
+void CMvcMfcDestopAppDlg::CloseView()
 {
 
 }

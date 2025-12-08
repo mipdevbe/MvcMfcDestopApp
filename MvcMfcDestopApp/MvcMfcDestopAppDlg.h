@@ -1,3 +1,4 @@
+
 // MvcMfcDestopAppDlg.h : header file
 //
 
@@ -9,20 +10,19 @@
 // CMvcMfcDestopAppDlg dialog
 class CMvcMfcDestopAppDlg : public CDialogEx, public IView
 {
-private:
 	CListBox _lstCompanies;
 	CListBox _lstEmployees;
 
-// Construction
+	// Construction
 public:
 	CMvcMfcDestopAppDlg(CWnd* pParent = nullptr);	// standard constructor
 
-// Dialog Data
+	// Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_MVCMFCDESTOPAPP_DIALOG };
 #endif
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV support
 
 
@@ -41,8 +41,7 @@ protected:
 	// IView interface
 public:
 	void CreateView() override; 
-	void UpdateEmployeesView(const std::vector<std::shared_ptr<IModel>>& data);
-
-	void CloseView() override;
-
+	void LoadView() override;
+	void UpdateView(const std::vector<std::shared_ptr<IModel>>& data) override; // Pure virtual method
+	void CloseView() override; // Pure virtual method
 };
