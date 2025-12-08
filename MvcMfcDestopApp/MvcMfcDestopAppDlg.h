@@ -3,7 +3,8 @@
 //
 
 #pragma once
-
+#include <memory>
+#include ".\Controller\Controllers.h"
 
 // CMvcMfcDestopAppDlg dialog
 class CMvcMfcDestopAppDlg : public CDialogEx
@@ -31,4 +32,9 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+
+	// Features
+public:
+
+	Controllers _controllers;
 };

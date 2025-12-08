@@ -9,8 +9,6 @@
 #endif
 
 #include "resource.h"		// main symbols
-#include <memory>
-#include ".\Controller\Controllers.h"
 
 // CMvcMfcDestopAppApp:
 // See MvcMfcDestopApp.cpp for the implementation of this class
@@ -27,19 +25,12 @@ public:
 public:
 	virtual BOOL InitInstance();
 
-// Features
-// 
-    template <typename C>
-    const Controllers& Controller() const {
-		return _controllers.Controller<C>();
-    }
+
 
 // Implementation
 
 	DECLARE_MESSAGE_MAP()
 
-private:
-    Controllers _controllers;
 };
 
 extern CMvcMfcDestopAppApp theApp;

@@ -6,12 +6,15 @@ class LeaveModel : public IModel
 {
 public:
 
-	LeaveModel(int id, const std::string& type, int duration);
-	virtual ~LeaveModel();
-	int getId() const;
+	LeaveModel(int id, const std::string& type, int duration) : id(id), type(type), duration(duration) 
+	{
+	}	
 
-	const std::string& getType() const;
-	int getDuration() const;
+	virtual ~LeaveModel() {}
+	int getId() const { return id; }
+
+	const std::string& getType() const { return type; }
+	int getDuration() const { return duration; }
 
 private:
 	int id;

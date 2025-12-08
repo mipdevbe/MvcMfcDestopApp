@@ -1,8 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "../Controller/IControler.h"
-#include "../Controller/CompanyController.h"
+#include "../Controller/CompaniesController.h"
 #include "../Controller/EmployeeController.h"
 #include "../Controller/LeaveController.h"
 
@@ -21,26 +20,23 @@ public:
 
 	void Initialize()
 	{
-        Controller<CompanyController>()->Initialize();
-        Controller<EmployeeController>()->Initialize();
-        Controller<LeaveController>()->Initialize();
+
 	}
 
-    template <typename C>
-    const std::shared_ptr<IController> Controller() const {
+	const CompaniesController& Companies() const {
+		return _companiesController;
+	}
 
-        CheckIsViewType(C);
+	const EmployeeController& Employee() const {
+		return _employeeController;
+	}
 
-        std::type_index typeIndex(typeid(C));
-        auto it = controllers.find(typeIndex);
-        if (it != controllers.end() && it->second.has_value())
-            return it->second;
-
-        auto newInstance = std::make_shared<C>();
-        controllers.push_back(newInstance);
-        return newInstance;
-    }
+	const LeaveController& Leave() const {
+		return _leaveController;
+	}
 
 private:
-	std::vector<std::shared_ptr<IController>> controllers;
+	CompaniesController _companiesController;
+    EmployeeController _employeeController;
+    LeaveController _leaveController;
 };

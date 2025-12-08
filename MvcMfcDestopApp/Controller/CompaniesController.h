@@ -1,27 +1,27 @@
 #pragma once
 #include "../Controller/IControler.h"
+#include "../Model/CompaniesModel.h"
 
-class CompanyController : public IController
+class CompaniesController : public IController
 {
 public:
 
-	CompanyController()
+	CompaniesController()
 	{
 	}
 
-	virtual ~CompanyController()
+	virtual ~CompaniesController()
 	{
 	}
 
 	bool Initialize() override
 	{
-		// Implementation of Initialize
 		return true;
 	}
 
 	bool Load() override
 	{
-		// Implementation of Load
+		_companiesModel.Load(); // --> should fire to the ui.
 		return true;
 	}
 
@@ -37,4 +37,6 @@ public:
 		return true;
 	}
 
+private:
+	CompaniesModel _companiesModel;
 };

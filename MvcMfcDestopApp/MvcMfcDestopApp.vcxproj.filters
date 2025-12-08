@@ -45,22 +45,13 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Model\CompaniesModel.h">
-      <Filter>Model</Filter>
-    </ClInclude>
     <ClInclude Include="Model\CompanyModel.h">
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="Model\EmployeeModel.h">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="Model\EmployeesModel.h">
-      <Filter>Model</Filter>
-    </ClInclude>
     <ClInclude Include="Model\LeaveModel.h">
-      <Filter>Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Model\LeavesModel.h">
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="View\IView.h">
@@ -75,7 +66,7 @@
     <ClInclude Include="Controller\Controllers.h">
       <Filter>Controller</Filter>
     </ClInclude>
-    <ClInclude Include="Controller\CompanyController.h">
+    <ClInclude Include="Controller\CompaniesController.h">
       <Filter>Controller</Filter>
     </ClInclude>
     <ClInclude Include="Controller\EmployeeController.h">
@@ -83,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="Controller\LeaveController.h">
       <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\CompaniesModel.h">
+      <Filter>Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -95,13 +89,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Model\CompaniesModel.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
     <ClCompile Include="Model\CompanyModel.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Model\EmployeesModel.cpp">
       <Filter>Model</Filter>
     </ClCompile>
   </ItemGroup>

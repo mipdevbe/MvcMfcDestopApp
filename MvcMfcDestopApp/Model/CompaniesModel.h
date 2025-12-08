@@ -1,17 +1,21 @@
 #pragma once
+
 #include <vector>
-#include "../Model/IModel.h"
-#include "../Model/CompanyModel.h"
+#include "..\Model\CompanyModel.h"
 
-class CompaniesModel : public IModel {
+class CompaniesModel {
 public:
-	CompaniesModel();
-	virtual ~CompaniesModel();
 
-	bool addCompany(const CompanyModel& company);
-	bool removeCompany(int id);
-	const std::vector<CompanyModel>& getAll() const;
+	CompaniesModel() {}
+	virtual ~CompaniesModel() {}
+
+	void Load() {
+		// Simulate loading data
+		_models.emplace_back(1, "TechCorp");
+		_models.emplace_back(2, "BizSolutions");
+		_models.emplace_back(3, "InnovateLtd");
+	}
 
 private:
-	std::vector<CompanyModel> companies;
+	std::vector<CompanyModel> _models;
 };

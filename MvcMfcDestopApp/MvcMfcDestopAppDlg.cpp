@@ -74,6 +74,16 @@ BOOL CMvcMfcDestopAppDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
+	//-------------------------------- ----------------
+	// Initialize Controllers
+	//-------------------------------- ----------------
+	_controllers.Initialize();
+	_controllers.Companies().Load();
+	//_controllers.Employees.Load();
+	//_controllers.Leaves.Load();
+
+	//-------------------------------- ----------------
+	// 
 	// Add "About..." menu item to system menu.
 
 	// IDM_ABOUTBOX must be in the system command range.

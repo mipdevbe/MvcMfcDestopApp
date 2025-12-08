@@ -1,4 +1,6 @@
-#include "CompanyModel.h"
+#include "..\pch.h"
+#include <string>
+#include "..\Model\CompanyModel.h"
 
 CompanyModel::CompanyModel(int id, const std::string& name)
 	: id(id), name(name) {
