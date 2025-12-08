@@ -9,6 +9,7 @@
 #endif
 
 #include "resource.h"		// main symbols
+#include ".\Controller\Controllers.h"
 
 // CMvcMfcDestopAppApp:
 // See MvcMfcDestopApp.cpp for the implementation of this class
@@ -31,6 +32,10 @@ public:
 
 	DECLARE_MESSAGE_MAP()
 
+	// Features
+public:
+
+	Controllers _controllers;
 };
 
 extern CMvcMfcDestopAppApp theApp;

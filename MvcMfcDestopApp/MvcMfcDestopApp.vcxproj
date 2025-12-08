@@ -202,7 +202,6 @@
     <ClInclude Include="View\IView.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Model\CompanyModel.cpp" />
     <ClCompile Include="MvcMfcDestopApp.cpp" />
     <ClCompile Include="MvcMfcDestopAppDlg.cpp" />
     <ClCompile Include="pch.cpp">

@@ -6,6 +6,7 @@
 #include "framework.h"
 #include "MvcMfcDestopApp.h"
 #include "MvcMfcDestopAppDlg.h"
+#include <memory>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -71,10 +72,14 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
+	std::shared_ptr<CMvcMfcDestopAppDlg> dlg = std::make_shared<CMvcMfcDestopAppDlg>(); // View
 
-	CMvcMfcDestopAppDlg dlg;
-	m_pMainWnd = &dlg;
-	INT_PTR nResponse = dlg.DoModal();
+	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Initialize();
+	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(std::move(dlg));
+
+	auto dltPtr = static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().View<CMvcMfcDestopAppDlg>();
+	m_pMainWnd = static_cast<CMvcMfcDestopAppDlg*>(dltPtr.get());
+	INT_PTR nResponse = dlg->DoModal();
 	if (nResponse == IDOK)
 	{
 		// TODO: Place code here to handle when the dialog is

@@ -20,10 +20,9 @@ public:
 
 	void Initialize()
 	{
-
 	}
 
-	const CompaniesController& Companies() const {
+	CompaniesController& Companies() {
 		return _companiesController;
 	}
 

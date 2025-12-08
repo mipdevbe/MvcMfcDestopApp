@@ -1,12 +1,13 @@
 #pragma once
 #include "../Controller/IControler.h"
 #include "../Model/CompaniesModel.h"
+#include "../MvcMfcDestopAppDlg.h"
 
 class CompaniesController : public IController
 {
 public:
 
-	CompaniesController()
+	CompaniesController() : IController()
 	{
 	}
 
@@ -16,12 +17,17 @@ public:
 
 	bool Initialize() override
 	{
+		registerModel<CompaniesModel>();
+
 		return true;
 	}
 
-	bool Load() override
+	// async ??
+	virtual bool Load() override
 	{
 		_companiesModel.Load(); // --> should fire to the ui.
+
+		View<CMvcMfcDestopAppDlg>()->Update();
 		return true;
 	}
 

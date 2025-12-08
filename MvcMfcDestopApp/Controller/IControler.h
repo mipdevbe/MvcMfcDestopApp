@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <typeindex>
 #include <unordered_map>
 #include "..\View\IView.h"
 #include "..\Model\IModel.h"
@@ -17,26 +18,46 @@ public:
 
     template <typename T>
     void CheckIsViewType(T type) {
-        static_assert(std::is_base_of<IView, T>::value, "T must be derived from IView.");
+        //static_assert(std::is_base_of<IView, T>::value, "T must be derived from IView.");
     }
 
     template <typename T>
     void CheckIsModelType(T type) {
-        static_assert(std::is_base_of<IModel, T>::value, "T must be derived from IModel.");
+        //static_assert(std::is_base_of<IModel, T>::value, "T must be derived from IModel.");
     }
 
-    template <typename V, typename M>
-    void RegisterModelView() {
+    template <typename T>
+    void registerView(std::shared_ptr<IView>&& view = nullptr) 
+    {
+        //CheckIsViewType(T);
 
-        CheckIsViewType(V);
-        CheckIsModelType(M);
-
-        std::type_index typeViewIndex(typeid(V));
+        std::type_index typeViewIndex(typeid(T));
         auto it = views.find(typeViewIndex);
         if (it == views.end())
-            views[typeViewIndex] = nullptr;
+            views[typeViewIndex] = view;
+    }
 
-        std::type_index typeModelIndex(typeid(M));
+    template <typename T>
+    const std::shared_ptr<IView> View() {
+
+        //CheckIsViewType(T);
+
+        std::type_index typeIndex(typeid(T));
+        auto it = views.find(typeIndex);
+        if (it != views.end() && it->second != nullptr)
+            return it->second;
+
+        auto newInstance = std::make_shared<T>(this);
+        views[typeIndex] = newInstance;
+        return newInstance;
+    }
+
+    template <typename T>
+    void registerModel() {
+
+       // CheckIsModelType(T);
+
+        std::type_index typeModelIndex(typeid(T));
         auto it = models.find(typeModelIndex);
         if (it == models.end())
             models[typeModelIndex] = nullptr;
@@ -50,27 +71,14 @@ public:
 
 protected:
 
-    template <typename V>
-    const std::shared_ptr<IView> View() const {
 
-        CheckIsViewType(T);
 
-        std::type_index typeIndex(typeid(V));
-        auto it = views.find(typeIndex);
-        if (it != views.end() && it->second.has_value())
-            return it->second;
-
-        auto newInstance = std::make_shared<T>(this);
-        views[typeIndex] = newInstance;
-        return newInstance;
-    }
-
-    template <typename M>
+    template <typename T>
     const std::shared_ptr<IModel> Model() const {
 
-        CheckIsModelType(M);
+        //CheckIsModelType(M);
 
-        std::type_index typeIndex(typeid(M));
+        std::type_index typeIndex(typeid(T));
         auto it = views.find(typeIndex);
         if (it != views.end() && it->second.has_value())
             return it->second;

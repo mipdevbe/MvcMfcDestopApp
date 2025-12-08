@@ -4,10 +4,10 @@
 
 #pragma once
 #include <memory>
-#include ".\Controller\Controllers.h"
+#include ".\View\IView.h"
 
 // CMvcMfcDestopAppDlg dialog
-class CMvcMfcDestopAppDlg : public CDialogEx
+class CMvcMfcDestopAppDlg : public CDialogEx, public IView
 {
 // Construction
 public:
@@ -33,8 +33,12 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 
-	// Features
-public:
 
-	Controllers _controllers;
+	// IView interface
+public:
+	void Create() override;
+	void Load() override;
+	bool Update() override;
+	bool Close() override;
+	bool IsClosed() const override;
 };

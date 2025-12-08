@@ -2,6 +2,7 @@
 
 class IView {
 public:
+	IView() {} // Default constructor
     virtual ~IView() {} // Virtual destructor for proper cleanup
 
     virtual void Create() = 0; // Pure virtual method

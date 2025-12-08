@@ -51,7 +51,7 @@ END_MESSAGE_MAP()
 
 
 CMvcMfcDestopAppDlg::CMvcMfcDestopAppDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_MVCMFCDESTOPAPP_DIALOG, pParent)
+	: CDialogEx(IDD_MVCMFCDESTOPAPP_DIALOG, pParent), IView()
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -77,10 +77,7 @@ BOOL CMvcMfcDestopAppDlg::OnInitDialog()
 	//-------------------------------- ----------------
 	// Initialize Controllers
 	//-------------------------------- ----------------
-	_controllers.Initialize();
-	_controllers.Companies().Load();
-	//_controllers.Employees.Load();
-	//_controllers.Leaves.Load();
+	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().Load();
 
 	//-------------------------------- ----------------
 	// 
@@ -163,3 +160,28 @@ HCURSOR CMvcMfcDestopAppDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+void CMvcMfcDestopAppDlg::Create()
+{
+
+}
+
+void CMvcMfcDestopAppDlg::Load()
+{
+
+}
+
+bool CMvcMfcDestopAppDlg::Update() 
+{
+
+	return false;
+}
+
+bool CMvcMfcDestopAppDlg::Close()
+{
+	return false;
+}
+
+bool CMvcMfcDestopAppDlg::IsClosed() const
+{
+	return false;
+}
