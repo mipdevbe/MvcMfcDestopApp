@@ -18,10 +18,10 @@ public:
 		_models.emplace_back(std::make_shared<CompanyModel>(3, "InnovateLtd"));
 	}
 
-	const std::vector<std::shared_ptr<IModel>>& getData() const {
+	const std::vector<std::unique_ptr<IModel>>& getData() const {
 		return _models;
 	}
 
 private:
-	std::vector<std::shared_ptr<IModel>> _models;
+	std::vector<std::unique_ptr<IModel>> _models;
 };

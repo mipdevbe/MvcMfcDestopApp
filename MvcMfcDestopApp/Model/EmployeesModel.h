@@ -35,7 +35,7 @@ public:
 		}
 	}
 
-	const std::vector<std::shared_ptr<IModel>>& getData() const {
+	const std::vector<std::unique_ptr<IModel>>& getData() const {
 		return _models;
 	}
 
@@ -45,5 +45,5 @@ private:
 	// Question: Is it a good approach to use std::shared_ptr or std::unique_ptr ?
 	//----------------------------------------------------------------------------
 
-	std::vector<std::shared_ptr<IModel>> _models;
+	std::vector<std::unique_ptr<IModel>> _models;
 }; 

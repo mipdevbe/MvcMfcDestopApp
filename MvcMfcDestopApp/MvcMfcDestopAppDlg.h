@@ -7,6 +7,7 @@
 #include ".\View\IView.h"
 #include ".\Model\IModel.h"
 
+
 // CMvcMfcDestopAppDlg dialog
 class CMvcMfcDestopAppDlg : public CDialogEx, public IView
 {
@@ -36,6 +37,8 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+	afx_msg LRESULT OnEmployeesLoaded(WPARAM, LPARAM);
+
 
 
 	// IView interface
@@ -45,4 +48,6 @@ public:
 	void UpdateView(const std::vector<std::shared_ptr<IModel>>& data) override; // Pure virtual method
 	void CloseView() override; // Pure virtual method
 	afx_msg void OnSelchangeLstCategories();
+	afx_msg void OnBnClickedRefresh();
+
 };

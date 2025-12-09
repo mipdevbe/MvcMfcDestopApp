@@ -64,10 +64,14 @@ void CMvcMfcDestopAppDlg::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CMvcMfcDestopAppDlg, CDialogEx)
+
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_LBN_SELCHANGE(IDC_LST_CATEGORIES, &CMvcMfcDestopAppDlg::OnSelchangeLstCategories)
+	ON_MESSAGE(WM_EMPLOYEES_LOADED,&CMvcMfcDestopAppDlg::OnEmployeesLoaded)
+	ON_LBN_SELCHANGE(IDC_LST_CATEGORIES, &CMvcMfcDestopAppDlg::OnSelchangeLstCategories)
+	ON_COMMAND(IDR_REFRESH_ITEM, &CMvcMfcDestopAppDlg::OnBnClickedRefresh)
 END_MESSAGE_MAP()
 
 
@@ -211,5 +215,17 @@ void CMvcMfcDestopAppDlg::CloseView()
 void CMvcMfcDestopAppDlg::OnSelchangeLstCategories()
 {
 	int currentSelection = _lstCompanies.GetCurSel()+ 1;
-	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().Load(currentSelection);
+	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().LoadAsync(currentSelection,this->m_hWnd);
+}
+
+LRESULT CMvcMfcDestopAppDlg::OnEmployeesLoaded(WPARAM, LPARAM) {
+	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().PublishLatest();
+	return 0;
+}
+void CMvcMfcDestopAppDlg::OnBnClickedRefresh()
+{
+	auto& app = *static_cast<CMvcMfcDestopAppApp*>(AfxGetApp());
+	app._controllers.Companies().Load();
+	app._controllers.Employees().LoadAsync(-1,m_hWnd);
+
 }

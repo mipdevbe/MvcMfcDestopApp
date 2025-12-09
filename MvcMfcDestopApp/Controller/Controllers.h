@@ -29,12 +29,21 @@ public:
 	CompaniesController& Companies() {
 		return _companiesController;
 	}
+	const CompaniesController& Companies() const {
+		return _companiesController;
+	}
 
 	EmployeesController& Employees() {
 		return _employeesController;
 	}
+	const EmployeesController& Employees() const{
+		return _employeesController;
+	}
 
 	LeaveController& Leave() {
+		return _leaveController;
+	}
+	const LeaveController& Leave() const{
 		return _leaveController;
 	}
 

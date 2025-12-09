@@ -77,13 +77,21 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	// Question: Is it normal to do all these castings ?
 	//---------------------------------------------------
 
-	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>(static_cast<CWnd*>(nullptr));
-	auto iview = std::static_pointer_cast<IView>(dlg);  // create lvalue of correct type
-	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(iview);
+	auto* app = static_cast<CMvcMfcDestopAppApp*>(AfxGetApp());
+	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>(nullptr);
+	std::shared_ptr<IView> dlgView = dlg;
+	app->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(dlgView);
 
 	auto employeeView = std::make_shared<EmployeeView>();
-	auto iviewEmployee = std::static_pointer_cast<IView>(employeeView);  // create lvalue of correct type
-	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().registerView<EmployeeView>(iviewEmployee);
+	std::shared_ptr<IView> empView = employeeView;
+	app->_controllers.Employees().registerView<EmployeeView>(dlgView);
+
+	//auto iview = std::static_pointer_cast<IView>(dlg);  // create lvalue of correct type
+	//static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(iview);
+
+	//auto employeeView = std::make_shared<EmployeeView>();
+	//auto iviewEmployee = std::static_pointer_cast<IView>(employeeView);  // create lvalue of correct type
+	//static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().registerView<EmployeeView>(iviewEmployee);
 
 	m_pMainWnd = static_cast<CMvcMfcDestopAppDlg*>(dlg.get());
 	INT_PTR nResponse = dlg->DoModal();
