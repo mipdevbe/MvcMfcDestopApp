@@ -73,6 +73,10 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
+	//---------------------------------------------------
+	// Question: Is it normal to do all these castings ?
+	//---------------------------------------------------
+
 	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>(static_cast<CWnd*>(nullptr));
 	auto iview = std::static_pointer_cast<IView>(dlg);  // create lvalue of correct type
 	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(iview);

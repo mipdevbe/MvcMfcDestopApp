@@ -22,6 +22,10 @@ public:
 	{
 	}
 
+	//--------------------------------------------------------------
+	// Question: Why const is not allowed for these three methods ?
+	//--------------------------------------------------------------
+
 	CompaniesController& Companies() {
 		return _companiesController;
 	}

@@ -40,5 +40,10 @@ public:
 	}
 
 private:
+
+	//----------------------------------------------------------------------------
+	// Question: Is it a good approach to use std::shared_ptr or std::unique_ptr ?
+	//----------------------------------------------------------------------------
+
 	std::vector<std::shared_ptr<IModel>> _models;
 }; 
