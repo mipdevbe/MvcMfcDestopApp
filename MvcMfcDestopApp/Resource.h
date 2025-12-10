@@ -21,7 +21,7 @@
 #define ID_FILES_SEP                    32773
 #define ID_FILES_                       32774
 #define ID_FILES_EXIT                   32775
-#define WM_EMPLOYEES_LOADED (WM_USER+1)
+
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

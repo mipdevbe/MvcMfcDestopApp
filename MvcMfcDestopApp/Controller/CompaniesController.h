@@ -11,7 +11,7 @@ public:
 	// Question: I thought the based contructor was auto invoked but need to check ?
 	//------------------------------------------------------------------------------
 
-	CompaniesController() /*: IController()*/
+	CompaniesController()
 	{
 	}
 

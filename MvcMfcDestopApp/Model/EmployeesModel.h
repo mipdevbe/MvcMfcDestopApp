@@ -16,22 +16,22 @@ public:
 
 		if (comppanyId == 1 || comppanyId == -1)
 		{
-			_models.emplace_back(std::make_shared<EmployeeModel>(1, 1, "TechCorp"));
-			_models.emplace_back(std::make_shared<EmployeeModel>(2, 1, "BizSolutions"));
-			_models.emplace_back(std::make_shared<EmployeeModel>(3, 1, "InnovateLtd"));
+			_models.emplace_back(std::make_unique<EmployeeModel>(1, 1, "TechCorp"));
+			_models.emplace_back(std::make_unique<EmployeeModel>(2, 1, "BizSolutions"));
+			_models.emplace_back(std::make_unique<EmployeeModel>(3, 1, "InnovateLtd"));
 		}
 
 		if (comppanyId == 2 || comppanyId == -1)
 		{
-			_models.emplace_back(std::make_shared<EmployeeModel>(1, 2, "TechCorp"));
-			_models.emplace_back(std::make_shared<EmployeeModel>(2, 2, "BizSolutions"));
+			_models.emplace_back(std::make_unique<EmployeeModel>(1, 2, "TechCorp"));
+			_models.emplace_back(std::make_unique<EmployeeModel>(2, 2, "BizSolutions"));
 		}
 
 		if (comppanyId == 3 || comppanyId == -1)
 		{
-			_models.emplace_back(std::make_shared<EmployeeModel>(1, 3, "TechCorp"));
-			_models.emplace_back(std::make_shared<EmployeeModel>(2, 3, "BizSolutions"));
-			_models.emplace_back(std::make_shared<EmployeeModel>(3, 3, "InnovateLtd"));
+			_models.emplace_back(std::make_unique<EmployeeModel>(1, 3, "TechCorp"));
+			_models.emplace_back(std::make_unique<EmployeeModel>(2, 3, "BizSolutions"));
+			_models.emplace_back(std::make_unique<EmployeeModel>(3, 3, "InnovateLtd"));
 		}
 	}
 
@@ -39,11 +39,11 @@ public:
 		return _models;
 	}
 
-private:
+	void clear() {
+		_models.clear();
+	}
 
-	//----------------------------------------------------------------------------
-	// Question: Is it a good approach to use std::shared_ptr or std::unique_ptr ?
-	//----------------------------------------------------------------------------
+private:
 
 	std::vector<std::unique_ptr<IModel>> _models;
 }; 

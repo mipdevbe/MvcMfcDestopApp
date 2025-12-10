@@ -84,14 +84,7 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 
 	auto employeeView = std::make_shared<EmployeeView>();
 	std::shared_ptr<IView> empView = employeeView;
-	app->_controllers.Employees().registerView<EmployeeView>(dlgView);
-
-	//auto iview = std::static_pointer_cast<IView>(dlg);  // create lvalue of correct type
-	//static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Companies().registerView<CMvcMfcDestopAppDlg>(iview);
-
-	//auto employeeView = std::make_shared<EmployeeView>();
-	//auto iviewEmployee = std::static_pointer_cast<IView>(employeeView);  // create lvalue of correct type
-	//static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().registerView<EmployeeView>(iviewEmployee);
+	app->_controllers.Employees().registerView<EmployeeView>(empView);
 
 	m_pMainWnd = static_cast<CMvcMfcDestopAppDlg*>(dlg.get());
 	INT_PTR nResponse = dlg->DoModal();

@@ -51,7 +51,7 @@ END_MESSAGE_MAP()
 
 
 CMvcMfcDestopAppDlg::CMvcMfcDestopAppDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_MVCMFCDESTOPAPP_DIALOG, pParent), IView()
+	: CDialogEx(IDD_MVCMFCDESTOPAPP_DIALOG, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -69,9 +69,7 @@ BEGIN_MESSAGE_MAP(CMvcMfcDestopAppDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_LBN_SELCHANGE(IDC_LST_CATEGORIES, &CMvcMfcDestopAppDlg::OnSelchangeLstCategories)
-	ON_MESSAGE(WM_EMPLOYEES_LOADED,&CMvcMfcDestopAppDlg::OnEmployeesLoaded)
 	ON_LBN_SELCHANGE(IDC_LST_CATEGORIES, &CMvcMfcDestopAppDlg::OnSelchangeLstCategories)
-	ON_COMMAND(IDR_REFRESH_ITEM, &CMvcMfcDestopAppDlg::OnBnClickedRefresh)
 END_MESSAGE_MAP()
 
 
@@ -95,13 +93,14 @@ BOOL CMvcMfcDestopAppDlg::OnInitDialog()
 	//-------------------------------- ----------------
 	auto iview = static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().View<EmployeeView>();
 	auto employeeView = std::static_pointer_cast<EmployeeView>(iview);
-	employeeView->setUpdateCallback([this](const std::vector<std::shared_ptr<IModel>>& data)
+	employeeView->setUpdateCallback([this](const std::vector<std::unique_ptr<IModel>>& data)
 		{
 			// Update Employees List Box
 			_lstEmployees.ResetContent();
-			for (const auto& item : data) {
-				auto employee = std::dynamic_pointer_cast<EmployeeModel>(item);
+			for (const std::unique_ptr<IModel>& item : data) {
+				auto* employee = dynamic_cast<EmployeeModel*>(item.get());
 				if (!employee) continue;
+
 				CString name(employee->getName().c_str());
 				_lstEmployees.AddString(name);
 			}
@@ -195,12 +194,12 @@ void CMvcMfcDestopAppDlg::LoadView()
 {
 }
 
-void CMvcMfcDestopAppDlg::UpdateView(const std::vector<std::shared_ptr<IModel>>& data)
+void CMvcMfcDestopAppDlg::UpdateView(const std::vector<std::unique_ptr<IModel>>& data)
 {
 	// Populate company list
 	_lstCompanies.ResetContent();
 	for (const auto& item : data) {
-		auto company = std::dynamic_pointer_cast<CompanyModel>(item);
+		auto* company = dynamic_cast<CompanyModel*>(item.get());
 		if (!company) continue;
 		CString name(company->getName().c_str());
 		_lstCompanies.AddString(name);
@@ -214,18 +213,7 @@ void CMvcMfcDestopAppDlg::CloseView()
 
 void CMvcMfcDestopAppDlg::OnSelchangeLstCategories()
 {
-	int currentSelection = _lstCompanies.GetCurSel()+ 1;
-	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().LoadAsync(currentSelection,this->m_hWnd);
-}
-
-LRESULT CMvcMfcDestopAppDlg::OnEmployeesLoaded(WPARAM, LPARAM) {
-	static_cast<CMvcMfcDestopAppApp*>(AfxGetApp())->_controllers.Employees().PublishLatest();
-	return 0;
-}
-void CMvcMfcDestopAppDlg::OnBnClickedRefresh()
-{
 	auto& app = *static_cast<CMvcMfcDestopAppApp*>(AfxGetApp());
-	app._controllers.Companies().Load();
-	app._controllers.Employees().LoadAsync(-1,m_hWnd);
-
+	int currentSelection = _lstCompanies.GetCurSel() + 1;
+	app._controllers.Employees().LoadAsync(currentSelection);
 }

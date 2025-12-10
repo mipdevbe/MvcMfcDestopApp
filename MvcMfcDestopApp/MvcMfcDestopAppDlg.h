@@ -36,8 +36,8 @@ protected:
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
+	afx_msg void OnSelchangeLstCategories();
 	DECLARE_MESSAGE_MAP()
-	afx_msg LRESULT OnEmployeesLoaded(WPARAM, LPARAM);
 
 
 
@@ -45,9 +45,8 @@ protected:
 public:
 	void CreateView() override; 
 	void LoadView() override;
-	void UpdateView(const std::vector<std::shared_ptr<IModel>>& data) override; // Pure virtual method
+	void UpdateView(const std::vector<std::unique_ptr<IModel>>& data) override; // Pure virtual method
 	void CloseView() override; // Pure virtual method
-	afx_msg void OnSelchangeLstCategories();
-	afx_msg void OnBnClickedRefresh();
+
 
 };

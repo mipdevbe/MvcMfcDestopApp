@@ -6,21 +6,20 @@ class CompanyModel : public IModel
 {
 public: 
 
-	CompanyModel::CompanyModel(int id, const std::string& name)
+	CompanyModel(int id, const std::string& name)
 		: id(id), name(name) , IModel() {
 	}
 
-	virtual CompanyModel::~CompanyModel() {
+	virtual ~CompanyModel() {
 	}
 
-	int CompanyModel::getId() const {
+	int getId() const {
 		return id;
 	}
 
-	const std::string& CompanyModel::getName() const {
+	const std::string& getName() const {
 		return name;
 	}
-
 
 private:
 	int id;

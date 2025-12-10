@@ -9,9 +9,9 @@ class EmployeeView : public IView
 {
 public:
 
-	using UpdateCallback = std::function<void(const std::vector<std::shared_ptr<IModel>>&)>;
+	using UpdateCallback = std::function<void(const std::vector<std::unique_ptr<IModel>>&)>;
 
-	EmployeeView() : IView() {}
+	EmployeeView() {}
 	virtual ~EmployeeView() {}
 
 	void CreateView() override {}
@@ -21,7 +21,7 @@ public:
 	void setUpdateCallback(const UpdateCallback& cb) { _callback = cb; }
 
 	// Implement interface: will prefer the stored callback; if not set, will use the passed one
-	void UpdateView(const std::vector<std::shared_ptr<IModel>>& data) override
+	void UpdateView(const std::vector<std::unique_ptr<IModel>>& data) override
 	{
 		if (_callback) {
 			_callback(data);
