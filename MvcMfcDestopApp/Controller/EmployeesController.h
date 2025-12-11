@@ -32,6 +32,7 @@ public:
 
 	virtual ~EmployeesController()
 	{
+		stop();
 	}
 
 	void Initialize() override
@@ -63,8 +64,10 @@ public:
 	}
 
 	void LoadAsync(int companyId = -1) {
+		start();
+
 		std::tuple<RequestType, int> request = std::make_tuple(RequestType::LoadEmployees, companyId);
-		_requestQueue.push(std::move(request));
+		_requestQueue.push(request);
 	}
 
 private:
@@ -80,7 +83,7 @@ protected:
 
 	using ResultTuple = std::tuple<RequestType, const std::vector<std::unique_ptr<IModel>>*>;
 
-	void doWork() override
+	void doActionsWork() override
 	{
 		while (!stopRequested.load())
 		{
@@ -105,16 +108,12 @@ protected:
 		}
 	}
 
-private:
 	// Responsible to flush all results and propage them....
-	std::thread resultsThread;
-	atomic<bool> stopResultsRequested{ false };
-
-	void processingProc()
+	void doResultsWork() override
 	{
 		auto view = View<EmployeeView>(); // existing helper that returns shared_ptr<IView>
 
-		while (!stopResultsRequested.load())
+		while (!stopRequested.load())
 		{
 			ResultTuple result;
 			if (_resultQueue.pop(result))

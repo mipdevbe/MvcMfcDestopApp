@@ -25,7 +25,8 @@ public:
             return;
 
         stopRequested.store(false);
-        thread = std::thread(&ThreadingBase::doWork, this);
+        threadResults = std::thread(&ThreadingBase::doResultsWork, this);
+        threadActions = std::thread(&ThreadingBase::doActionsWork, this);
         running = true;
     }
 
@@ -35,23 +36,25 @@ public:
             return;
 
         stopRequested.store(true);
-        if (thread.joinable())
-            thread.join();
+        if (threadResults.joinable())
+            threadResults.join();
+
+        if (threadActions.joinable())
+            threadActions.join();
 
         running = false;
     }
 
-    bool isRunning() const { return running; }
-
-
-    std::atomic<bool> isStopRequested() const { return stopRequested.load(); }
+    std::atomic<bool> isThreadRunning() const { return stopRequested.load(); }
 
 protected:
-    virtual void doWork() = 0; // to be implemented by derived class
+    virtual void doActionsWork() = 0; // to be implemented by derived class
+    virtual void doResultsWork() = 0; // to be implemented by derived class
     std::atomic<bool> stopRequested{ false };
 
 private:
-    std::thread thread;
+    std::thread threadResults;
+    std::thread threadActions;
     bool running{ false };
 };
 
