@@ -16,6 +16,8 @@
 #define IDR_UPDATE_ENTRY                1004
 #define IDR_DELETE_ENTRY2               1005
 #define IDR_REFRESH_ITEM                1005
+#define IDR_SEARCH                      1005
+#define IDC_EDT_SEARCH                  1006
 #define ID_FILES_LOAD                   32771
 #define ID_FILES_SAVE                   32772
 #define ID_FILES_SEP                    32773
@@ -28,7 +30,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        131
 #define _APS_NEXT_COMMAND_VALUE         32776
-#define _APS_NEXT_CONTROL_VALUE         1006
+#define _APS_NEXT_CONTROL_VALUE         1007
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

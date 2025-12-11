@@ -49,4 +49,7 @@ public:
 	void CloseView() override; // Pure virtual method
 
 
+	afx_msg void OnBnClickedSearch();
+	CEdit _searchCriteria;
+	afx_msg void OnBnClickedDeleteEntry();
 };

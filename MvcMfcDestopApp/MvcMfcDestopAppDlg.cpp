@@ -61,6 +61,7 @@ void CMvcMfcDestopAppDlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_LST_CATEGORIES, _lstCompanies);
 	DDX_Control(pDX, IDC_LST_ITEMS, _lstEmployees);
+	DDX_Control(pDX, IDC_EDT_SEARCH, _searchCriteria);
 }
 
 BEGIN_MESSAGE_MAP(CMvcMfcDestopAppDlg, CDialogEx)
@@ -70,6 +71,8 @@ BEGIN_MESSAGE_MAP(CMvcMfcDestopAppDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_LBN_SELCHANGE(IDC_LST_CATEGORIES, &CMvcMfcDestopAppDlg::OnSelchangeLstCategories)
 	ON_LBN_SELCHANGE(IDC_LST_CATEGORIES, &CMvcMfcDestopAppDlg::OnSelchangeLstCategories)
+	ON_BN_CLICKED(IDR_SEARCH, &CMvcMfcDestopAppDlg::OnBnClickedSearch)
+	ON_BN_CLICKED(IDR_DELETE_ENTRY, &CMvcMfcDestopAppDlg::OnBnClickedDeleteEntry)
 END_MESSAGE_MAP()
 
 
@@ -216,4 +219,23 @@ void CMvcMfcDestopAppDlg::OnSelchangeLstCategories()
 	auto& app = *static_cast<CMvcMfcDestopAppApp*>(AfxGetApp());
 	int currentSelection = _lstCompanies.GetCurSel() + 1;
 	app._controllers.Employees().LoadAsync(currentSelection);
+}
+
+void CMvcMfcDestopAppDlg::OnBnClickedSearch()
+{
+	// TODO: Add your control notification handler code here
+}
+
+void CMvcMfcDestopAppDlg::OnBnClickedDeleteEntry()
+{
+	CString _searchText{};
+	_searchCriteria.GetWindowText(_searchText);
+
+	if (_searchText.IsEmpty()) {
+		AfxMessageBox(_T("Please enter a search criteria."));
+		return;
+	}
+
+
+
 }
