@@ -11,11 +11,18 @@
 // turns off MFC's hiding of some common and often safely ignored warning messages
 #define _AFX_ALL_WARNINGS
 
-#include <afxwin.h>         // MFC core and standard components
-#include <afxext.h>         // MFC extensions
+#include <afxwin.h>            // MFC core and standard components
+#include <afxext.h>            // MFC extensions
+#include <afxcontrolbars.h>    // Ribbons / docking basics (brings in pane infrastructure)
+#include <afxole.h>            // OLE support (COleDropTarget)
+#include <afxcmn.h>            // Common controls (needed by tabs)
+#include <afxmdichildwndex.h>  // Extended MDI child support
+#include <afxmdiframewndex.h>  // Extended MDI frame support
+#include <afxtabctrl.h>        // Tab controls (CMFCTabCtrl)
+#include <afxpanecontainer.h>  // Pane container declarations
+#include <afxdockablepane.h>   // Docking panes / CPaneContainer
 
-
-#include <afxdisp.h>        // MFC Automation classes
+#include <afxdisp.h>           // MFC Automation classes
 
 
 
@@ -25,8 +32,6 @@
 #ifndef _AFX_NO_AFXCMN_SUPPORT
 #include <afxcmn.h>             // MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
-
-#include <afxcontrolbars.h>     // MFC support for ribbons and control bars
 
 
 

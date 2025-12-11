@@ -78,6 +78,8 @@ private:
 
 protected:
 
+	using ResultTuple = std::tuple<RequestType, const std::vector<std::unique_ptr<IModel>>*>;
+
 	void doWork() override
 	{
 		while (!stopRequested.load())
@@ -85,17 +87,17 @@ protected:
 			std::tuple<RequestType, int> request;
 			if (_requestQueue.pop(request))
 			{
-				std::tuple<RequestType, std::vector<std::unique_ptr<IModel>>> result;
+				ResultTuple result;
 				switch (std::get<0>(request))
 				{
-					case RequestType::LoadEmployees:
-					{
-						int companyId = std::get<1>(request);
-						_employeesModel.Load(companyId);
-						result = std::make_tuple(RequestType::LoadEmployees, _employeesModel.getData());
-						_resultQueue.push(std::move(result));
-						break;
-					}
+				case RequestType::LoadEmployees:
+				{
+					int companyId = std::get<1>(request);
+					_employeesModel.Load(companyId);
+					result = std::make_tuple(RequestType::LoadEmployees, &_employeesModel.getData());
+					_resultQueue.push(result); 
+					break;
+				}
 				}
 			}
 
@@ -114,28 +116,31 @@ private:
 
 		while (!stopResultsRequested.load())
 		{
-			std::tuple<RequestType, std::vector<std::unique_ptr<IModel>>> result;
+			ResultTuple result;
 			if (_resultQueue.pop(result))
 			{
 				if (view)
 				{
 					switch (std::get<0>(result))
 					{
-						case RequestType::LoadEmployees:
-						{
-							view->UpdateView(std::move(std::get<1>(result)));
-							break;
+					case RequestType::LoadEmployees:
+					{
+						const auto* data = std::get<1>(result);
+						if (data) {
+							view->UpdateView(*data);
 						}
+						break;
+					}
 					}
 				}
 			}
 
-			// Sleep for interval period
+			
 			std::this_thread::sleep_for(std::chrono::milliseconds(20));
 		}
 	}
 private:
 	EmployeesModel _employeesModel{};
 	MessagingQueue<std::tuple<RequestType, int>> _requestQueue{};
-	MessagingQueue<std::tuple<RequestType,std::vector<std::unique_ptr<IModel>>>> _resultQueue{};
+	MessagingQueue<ResultTuple> _resultQueue{};
 };
