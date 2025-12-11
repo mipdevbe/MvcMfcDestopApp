@@ -71,7 +71,7 @@ public:
 	void LoadAsync(int companyId = -1) {
 		start();
 
-		SetActionMessage("Loading employees...");
+		SetPlaceholderMessage("Loading employees...");
 		RequestTuple request = std::make_tuple(RequestType::LoadEmployees, std::vector<std::any> { companyId });
 		_requestQueue.push(request);
 	}
@@ -80,14 +80,14 @@ public:
 	void SearchAsync(const std::string& criteria, int companyId = -1) {
 		start();
 
-		SetActionMessage("Searching employees...");
+		SetPlaceholderMessage("Searching employees...");
 		RequestTuple request = std::make_tuple(RequestType::SearchEmployees, std::vector<std::any> { criteria, companyId });
 		_requestQueue.push(request);
 	}
 
 private:
 
-	void SetActionMessage(LPCSTR message)
+	void SetPlaceholderMessage(LPCSTR message)
 	{
 		auto view = View<EmployeeView>();
 		if (view)
@@ -113,21 +113,29 @@ protected:
 	{
 		while (!stopRequested.load())
 		{
-			RequestTuple request;
-			if (_requestQueue.pop(request))
+			try
 			{
-				ResultTuple result;
-				auto requestType = std::get<0>(request); 
-				switch (requestType)
+				RequestTuple request;
+				if (_requestQueue.pop(request))
 				{
+					ResultTuple result;
+					auto requestType = std::get<0>(request);
+					switch (requestType)
+					{
 					case RequestType::LoadEmployees:
 					{
 						auto companyIdAny = std::get<1>(request)[0];
-						int companyId = std::any_cast<int>(companyIdAny);
+						if (!companyIdAny.has_value())
+							throw std::runtime_error("Invalid companyId parameter.");
 
+						auto* companyIdPtr = std::any_cast<int>(&companyIdAny);
+						if (!companyIdPtr) 
+							throw std::runtime_error("Invalid companyId parameter type.");
+
+						int companyId = *companyIdPtr;
 						_employeesModel.Load(companyId);
 						result = std::make_tuple(requestType, &_employeesModel.getData());
-						_resultQueue.push(result); 
+						_resultQueue.push(result);
 						break;
 					}
 					case RequestType::SearchEmployees:
@@ -137,10 +145,24 @@ protected:
 						//-----------------------------------------------------------------------
 
 						auto criteriaAny = std::get<1>(request)[0];
-						auto companyIdAny = std::get<1>(request)[1];
+						if (!criteriaAny.has_value())
+							throw std::runtime_error("Invalid criteria parameter.");
 
-						std::string criteria = std::any_cast<std::string>(criteriaAny);
-						int companyId = std::any_cast<int>(companyIdAny);
+						auto companyIdAny = std::get<1>(request)[1];
+						if (!companyIdAny.has_value())
+							throw std::runtime_error("Invalid companyId parameter.");
+
+						auto* criteriaPtr = std::any_cast<string>(&criteriaAny);
+						if (!criteriaPtr)
+							throw std::runtime_error("Invalid criteria parameter type.");
+
+						std::string criteria = *criteriaPtr;
+
+						auto* companyIdPtr = std::any_cast<int>(&companyIdAny);
+						if (!companyIdPtr)
+							throw std::runtime_error("Invalid companyId parameter type.");
+
+						int companyId = *companyIdPtr;
 
 						_employeesModel.Load(companyId);
 
@@ -168,7 +190,12 @@ protected:
 						break;
 					}
 
+					}
 				}
+			}
+			catch(const std::exception& ex)
+			{
+				SetPlaceholderMessage(ex.what());
 			}
 
 			this_thread::sleep_for(chrono::milliseconds(20));
