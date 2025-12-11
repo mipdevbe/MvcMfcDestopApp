@@ -72,7 +72,6 @@ BEGIN_MESSAGE_MAP(CMvcMfcDestopAppDlg, CDialogEx)
 	ON_LBN_SELCHANGE(IDC_LST_CATEGORIES, &CMvcMfcDestopAppDlg::OnSelchangeLstCategories)
 	ON_LBN_SELCHANGE(IDC_LST_CATEGORIES, &CMvcMfcDestopAppDlg::OnSelchangeLstCategories)
 	ON_BN_CLICKED(IDR_SEARCH, &CMvcMfcDestopAppDlg::OnBnClickedSearch)
-	ON_BN_CLICKED(IDR_DELETE_ENTRY, &CMvcMfcDestopAppDlg::OnBnClickedDeleteEntry)
 END_MESSAGE_MAP()
 
 
@@ -216,17 +215,13 @@ void CMvcMfcDestopAppDlg::CloseView()
 
 void CMvcMfcDestopAppDlg::OnSelchangeLstCategories()
 {
+	_searchCriteria.SetWindowText("");
 	auto& app = *static_cast<CMvcMfcDestopAppApp*>(AfxGetApp());
 	int currentSelection = _lstCompanies.GetCurSel() + 1;
 	app._controllers.Employees().LoadAsync(currentSelection);
 }
 
 void CMvcMfcDestopAppDlg::OnBnClickedSearch()
-{
-	// TODO: Add your control notification handler code here
-}
-
-void CMvcMfcDestopAppDlg::OnBnClickedDeleteEntry()
 {
 	CString _searchText{};
 	_searchCriteria.GetWindowText(_searchText);
@@ -236,6 +231,7 @@ void CMvcMfcDestopAppDlg::OnBnClickedDeleteEntry()
 		return;
 	}
 
-
-
+	auto& app = *static_cast<CMvcMfcDestopAppApp*>(AfxGetApp());
+	int currentSelection = _lstCompanies.GetCurSel() + 1;
+	app._controllers.Employees().SearchAsync(std::string{ _searchText }, currentSelection);
 }

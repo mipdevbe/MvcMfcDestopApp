@@ -12,7 +12,11 @@
 #include <future>
 #include <memory>
 #include <vector>
+#include <array>
+#include <any>
 #include <Windows.h>
+#include <Filter.h>
+#include <Filter.h>
 
 class EmployeesController : public IController, public ThreadingBase
 {
@@ -21,7 +25,8 @@ private:
 	{
 		LoadEmployees,
 		UpdateEmployee,
-		DeleteEmployee
+		DeleteEmployee,
+		SearchEmployees
 	};
 
 public:
@@ -66,7 +71,17 @@ public:
 	void LoadAsync(int companyId = -1) {
 		start();
 
-		std::tuple<RequestType, int> request = std::make_tuple(RequestType::LoadEmployees, companyId);
+		SetActionMessage("Loading employees...");
+		RequestTuple request = std::make_tuple(RequestType::LoadEmployees, std::vector<std::any> { companyId });
+		_requestQueue.push(request);
+	}
+
+
+	void SearchAsync(const std::string& criteria, int companyId = -1) {
+		start();
+
+		SetActionMessage("Searching employees...");
+		RequestTuple request = std::make_tuple(RequestType::SearchEmployees, std::vector<std::any> { criteria, companyId });
 		_requestQueue.push(request);
 	}
 
@@ -75,32 +90,84 @@ private:
 	void SetActionMessage(LPCSTR message)
 	{
 		auto view = View<EmployeeView>();
-		if (view) {
+		if (view)
+		{
+			auto employee = std::make_unique<EmployeeModel>(
+				-1,
+				-1,
+				message
+			);
+
+			_placeholder.clear();
+			_placeholder.emplace_back(std::move(employee));
+			view->UpdateView(_placeholder);
 		}
 	}
 
 protected:
 
 	using ResultTuple = std::tuple<RequestType, const std::vector<std::unique_ptr<IModel>>*>;
+	using RequestTuple = std::tuple<RequestType, std::vector< std::any >>;
 
 	void doActionsWork() override
 	{
 		while (!stopRequested.load())
 		{
-			std::tuple<RequestType, int> request;
+			RequestTuple request;
 			if (_requestQueue.pop(request))
 			{
 				ResultTuple result;
-				switch (std::get<0>(request))
+				auto requestType = std::get<0>(request); 
+				switch (requestType)
 				{
-				case RequestType::LoadEmployees:
-				{
-					int companyId = std::get<1>(request);
-					_employeesModel.Load(companyId);
-					result = std::make_tuple(RequestType::LoadEmployees, &_employeesModel.getData());
-					_resultQueue.push(result); 
-					break;
-				}
+					case RequestType::LoadEmployees:
+					{
+						auto companyIdAny = std::get<1>(request)[0];
+						int companyId = std::any_cast<int>(companyIdAny);
+
+						_employeesModel.Load(companyId);
+						result = std::make_tuple(requestType, &_employeesModel.getData());
+						_resultQueue.push(result); 
+						break;
+					}
+					case RequestType::SearchEmployees:
+					{
+						//-----------------------------------------------------------------------
+						// ? how to be sure we have the expected amount and expected data types ?
+						//-----------------------------------------------------------------------
+
+						auto criteriaAny = std::get<1>(request)[0];
+						auto companyIdAny = std::get<1>(request)[1];
+
+						std::string criteria = std::any_cast<std::string>(criteriaAny);
+						int companyId = std::any_cast<int>(companyIdAny);
+
+						_employeesModel.Load(companyId);
+
+						_filteredDataSet.clear();
+						for (const auto& item : _employeesModel.getData()) {
+							auto* employee = dynamic_cast<EmployeeModel*>(item.get());
+							if (employee)
+							{
+								auto firstCheck = employee->getName()._Starts_with(criteria);
+								auto secondCheck = employee->getCompanyId() == companyId;
+								if ((firstCheck) && (secondCheck))
+								{
+									_filteredDataSet.emplace_back(std::make_unique<EmployeeModel>(
+										employee->getId(),
+										employee->getCompanyId(),
+										employee->getName()
+									));
+								}
+							}
+						}
+
+
+						result = std::make_tuple(requestType, &_filteredDataSet);
+						_resultQueue.push(result);
+						break;
+					}
+
 				}
 			}
 
@@ -123,6 +190,7 @@ protected:
 					switch (std::get<0>(result))
 					{
 					case RequestType::LoadEmployees:
+					case RequestType::SearchEmployees:
 					{
 						const auto* data = std::get<1>(result);
 						if (data) {
@@ -140,6 +208,9 @@ protected:
 	}
 private:
 	EmployeesModel _employeesModel{};
-	MessagingQueue<std::tuple<RequestType, int>> _requestQueue{};
+	MessagingQueue<RequestTuple> _requestQueue{};
 	MessagingQueue<ResultTuple> _resultQueue{};
+
+	std::vector<std::unique_ptr<IModel>> _filteredDataSet{};
+	std::vector<std::unique_ptr<IModel>> _placeholder{};
 };

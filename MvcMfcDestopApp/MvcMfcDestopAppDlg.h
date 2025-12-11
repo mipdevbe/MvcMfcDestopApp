@@ -13,6 +13,7 @@ class CMvcMfcDestopAppDlg : public CDialogEx, public IView
 {
 	CListBox _lstCompanies;
 	CListBox _lstEmployees;
+	CEdit _searchCriteria;
 
 	// Construction
 public:
@@ -37,6 +38,7 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	afx_msg void OnSelchangeLstCategories();
+	afx_msg void OnBnClickedSearch();
 	DECLARE_MESSAGE_MAP()
 
 
@@ -48,8 +50,4 @@ public:
 	void UpdateView(const std::vector<std::unique_ptr<IModel>>& data) override; // Pure virtual method
 	void CloseView() override; // Pure virtual method
 
-
-	afx_msg void OnBnClickedSearch();
-	CEdit _searchCriteria;
-	afx_msg void OnBnClickedDeleteEntry();
 };
