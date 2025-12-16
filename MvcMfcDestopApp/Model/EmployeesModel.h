@@ -2,7 +2,8 @@
 
 #include <vector>
 #include <memory>
-#include "..\Model\EmployeeModel.h"
+#include "../Model/EmployeeModel.h"
+#include "./Tools/Database.h"
 
 class EmployeesModel {
 public:
@@ -16,9 +17,16 @@ public:
 
 		if (comppanyId == 1 || comppanyId == -1)
 		{
-			_models.emplace_back(std::make_unique<EmployeeModel>(1, 1, "TechCorp"));
-			_models.emplace_back(std::make_unique<EmployeeModel>(2, 1, "BizSolutions"));
-			_models.emplace_back(std::make_unique<EmployeeModel>(3, 1, "InnovateLtd"));
+			Database db;
+
+			db.connect("EmploymentLeaveDB", "DESKTOP-SGQ88T5\\MIP", "");
+			db.getEmployees(_models, 1);
+
+			db.disconnect();
+
+			//_models.emplace_back(std::make_unique<EmployeeModel>(1, 1, "TechCorp"));
+			//_models.emplace_back(std::make_unique<EmployeeModel>(2, 1, "BizSolutions"));
+			//_models.emplace_back(std::make_unique<EmployeeModel>(3, 1, "InnovateLtd"));
 		}
 
 		if (comppanyId == 2 || comppanyId == -1)

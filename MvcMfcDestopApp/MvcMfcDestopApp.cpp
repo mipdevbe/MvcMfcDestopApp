@@ -7,6 +7,7 @@
 #include "MvcMfcDestopApp.h"
 #include "MvcMfcDestopAppDlg.h"
 #include "./View/EmployeeView.h"
+
 #include <memory>
 
 #ifdef _DEBUG
@@ -72,10 +73,6 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	// TODO: You should modify this string to be something appropriate
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
-
-	//---------------------------------------------------
-	// Question: Is it normal to do all these castings ?
-	//---------------------------------------------------
 
 	auto* app = static_cast<CMvcMfcDestopAppApp*>(AfxGetApp());
 	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>(nullptr);

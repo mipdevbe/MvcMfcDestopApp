@@ -93,6 +93,9 @@
     <ClInclude Include="Tools\MessagingQueue.h">
       <Filter>Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Tools\Database.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MvcMfcDestopApp.cpp">
@@ -103,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\Database.cpp">
+      <Filter>Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
