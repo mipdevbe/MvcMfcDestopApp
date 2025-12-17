@@ -18,7 +18,7 @@ public:
 	bool connect(const string& dsn, const string& user, const string& password);
 	void disconnect();
 
-	bool getEmployees(std::vector<std::unique_ptr<IModel>>& dataset, int companyId);
+	std::vector<std::unique_ptr<IModel>> getEmployees(int companyId);
 
 private:
 	bool executeQuery(const string& query);

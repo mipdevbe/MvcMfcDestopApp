@@ -20,7 +20,7 @@ public:
 			Database db;
 
 			db.connect("EmploymentLeaveDB", "DESKTOP-SGQ88T5\\MIP", "");
-			db.getEmployees(_models, 1);
+			_models = db.getEmployees(1);
 
 			db.disconnect();
 

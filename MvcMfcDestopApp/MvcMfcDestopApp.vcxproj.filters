@@ -28,6 +28,9 @@
     <Filter Include="Tools">
       <UniqueIdentifier>{9ec948db-e473-4049-9be3-1b090caed740}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Trials">
+      <UniqueIdentifier>{553c2963-9739-4fe5-8a2e-9ed60a4cd230}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MvcMfcDestopApp.h">
@@ -96,6 +99,9 @@
     <ClInclude Include="Tools\Database.h">
       <Filter>Tools</Filter>
     </ClInclude>
+    <ClInclude Include="Trials\Trial1.h">
+      <Filter>Trials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MvcMfcDestopApp.cpp">
@@ -109,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="Tools\Database.cpp">
       <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="Trials\Trial1.cpp">
+      <Filter>Trials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

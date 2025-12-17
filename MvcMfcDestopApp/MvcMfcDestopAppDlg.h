@@ -47,6 +47,7 @@ protected:
 public:
 	void CreateView() override; 
 	void LoadView() override;
+
 	void UpdateView(const std::vector<std::unique_ptr<IModel>>& data) override; // Pure virtual method
 	void CloseView() override; // Pure virtual method
 

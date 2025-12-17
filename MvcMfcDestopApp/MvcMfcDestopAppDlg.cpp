@@ -196,6 +196,7 @@ void CMvcMfcDestopAppDlg::LoadView()
 {
 }
 
+
 void CMvcMfcDestopAppDlg::UpdateView(const std::vector<std::unique_ptr<IModel>>& data)
 {
 	// Populate company list

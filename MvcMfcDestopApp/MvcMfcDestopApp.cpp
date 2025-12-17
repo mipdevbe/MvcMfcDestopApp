@@ -7,6 +7,7 @@
 #include "MvcMfcDestopApp.h"
 #include "MvcMfcDestopAppDlg.h"
 #include "./View/EmployeeView.h"
+#include "./Trials/Trial1.h"
 
 #include <memory>
 
@@ -73,6 +74,9 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	// TODO: You should modify this string to be something appropriate
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
+
+	TrialOne trial1;
+	trial1.RunTrial();
 
 	auto* app = static_cast<CMvcMfcDestopAppApp*>(AfxGetApp());
 	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>(nullptr);

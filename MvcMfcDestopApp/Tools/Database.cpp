@@ -99,15 +99,15 @@ SQLSMALLINT Database::SQLCHARLength(SQLCHAR* sqlCharArray) const
 	return length;
 }
 
-bool Database::getEmployees(std::vector<std::unique_ptr<IModel>>& dataset, int companyId) 
+std::vector<std::unique_ptr<IModel>> Database::getEmployees(int companyId)
 {
-	bool returnValue = false;
+	auto dataset = std::vector<std::unique_ptr<IModel>>{};
 
 	if (!executeQuery("SELECT Employees.Id, Employees.Name FROM Employees, CompaniesEmployees WHERE CompaniesEmployees.CompanyId = 1 AND Employees.Id = CompaniesEmployees.EmployeeId"))
-		return returnValue;
+		return dataset;
 
 	if (!isConnected || !hStmt) 
-		return returnValue;
+		return dataset;
 
 	dataset.clear();
 
@@ -123,5 +123,5 @@ bool Database::getEmployees(std::vector<std::unique_ptr<IModel>>& dataset, int c
 		dataset.emplace_back(std::make_unique<EmployeeModel>(id, companyId, name));
 	}
 
-	return true;
+	return dataset;
 }
