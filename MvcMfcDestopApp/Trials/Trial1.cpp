@@ -42,7 +42,7 @@ std::vector<std::unique_ptr<EmployeeModel>> TrialOne::getDataSet() const
 void TrialOne::Run()
 {
 	// auto results = getDataSet();
-	auto results = std::move(moveDataSet());
+	auto&& results = std::move(moveDataSet());
 	for (const auto& item : results)
 	{
 		std::cout << "Employee ID: " << item->getId()
