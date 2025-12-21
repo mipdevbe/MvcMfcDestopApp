@@ -16,5 +16,5 @@ public:
 	// Returns the dataset by moving it (useful if you want to transfer ownership)
 	std::vector<std::unique_ptr<EmployeeModel>>&& moveDataSet();
 
-	void RunTrial();
+	void Run();
 };

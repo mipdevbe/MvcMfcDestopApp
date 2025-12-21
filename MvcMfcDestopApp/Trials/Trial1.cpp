@@ -34,7 +34,7 @@ std::vector<std::unique_ptr<EmployeeModel>> TrialOne::getDataSet() const
 	return dataset;
 }
 
-void TrialOne::RunTrial()
+void TrialOne::Run()
 {
 	// auto results = getDataSet();
 	auto results = std::move(moveDataSet());

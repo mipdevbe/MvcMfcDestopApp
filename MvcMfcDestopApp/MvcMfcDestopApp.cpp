@@ -76,7 +76,7 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
 	TrialOne trial1;
-	trial1.RunTrial();
+	trial1.Run();
 
 	auto* app = static_cast<CMvcMfcDestopAppApp*>(AfxGetApp());
 	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>(nullptr);
