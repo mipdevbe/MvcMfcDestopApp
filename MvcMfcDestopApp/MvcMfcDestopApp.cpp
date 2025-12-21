@@ -75,6 +75,7 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
+	// Just to validate the move semantics
 	TrialOne trial1;
 	trial1.Run();
 
