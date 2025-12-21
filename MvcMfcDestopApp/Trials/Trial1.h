@@ -10,7 +10,11 @@ public:
 	TrialOne();
 	virtual ~TrialOne();
 
-	std::vector<std::unique_ptr<EmployeeModel>> getDataSet();
+	// Returns a copy of the dataset
+	std::vector<std::unique_ptr<EmployeeModel>> getDataSet() const;
+
+	// Returns the dataset by moving it (useful if you want to transfer ownership)
+	std::vector<std::unique_ptr<EmployeeModel>>&& moveDataSet();
 
 	void RunTrial();
 };
