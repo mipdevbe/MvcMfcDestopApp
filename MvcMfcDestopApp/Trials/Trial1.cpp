@@ -1,5 +1,6 @@
 #include "Trial1.h"
 #include <iostream>
+#include <afx.h>
 
 TrialOne::TrialOne()
 {
@@ -12,6 +13,8 @@ TrialOne::~TrialOne()
 // Returns the dataset by moving it (useful if you want to transfer ownership)
 std::vector<std::unique_ptr<EmployeeModel>>&& TrialOne::moveDataSet()
 {
+	AfxOutputDebugString("TrialOne::moveDataSet has been called.");
+
     // Create a static dataset to demonstrate move semantics.
     static std::vector<std::unique_ptr<EmployeeModel>> dataset;
     if (dataset.empty()) {
@@ -25,6 +28,8 @@ std::vector<std::unique_ptr<EmployeeModel>>&& TrialOne::moveDataSet()
 // Returns a copy of the dataset
 std::vector<std::unique_ptr<EmployeeModel>> TrialOne::getDataSet() const
 {
+	AfxOutputDebugString("TrialOne::getDataSet has been called.");
+
 	auto dataset = std::vector<std::unique_ptr<EmployeeModel>>{};
 
 	dataset.emplace_back(std::make_unique<EmployeeModel>(1, 1, "TechCorp"));
