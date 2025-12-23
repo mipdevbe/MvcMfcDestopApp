@@ -8,6 +8,7 @@
 #include "MvcMfcDestopAppDlg.h"
 #include "./View/EmployeeView.h"
 #include "./Trials/Trial1.h"
+#include "./Trials/Trial2.h"
 
 #include <memory>
 
@@ -78,6 +79,9 @@ BOOL CMvcMfcDestopAppApp::InitInstance()
 	// Just to validate the move semantics
 	TrialOne trial1;
 	trial1.Run();
+
+	Trial2 trial2;
+	trial2.Run();
 
 	auto* app = static_cast<CMvcMfcDestopAppApp*>(AfxGetApp());
 	auto dlg = std::make_shared<CMvcMfcDestopAppDlg>(nullptr);

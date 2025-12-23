@@ -102,6 +102,9 @@
     <ClInclude Include="Trials\Trial1.h">
       <Filter>Trials</Filter>
     </ClInclude>
+    <ClInclude Include="Trials\Trial2.h">
+      <Filter>Trials</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MvcMfcDestopApp.cpp">
@@ -117,6 +120,9 @@
       <Filter>Tools</Filter>
     </ClCompile>
     <ClCompile Include="Trials\Trial1.cpp">
+      <Filter>Trials</Filter>
+    </ClCompile>
+    <ClCompile Include="Trials\Trial2.cpp">
       <Filter>Trials</Filter>
     </ClCompile>
   </ItemGroup>

@@ -214,6 +214,7 @@
     <ClInclude Include="Tools\MessagingQueue.h" />
     <ClInclude Include="Tools\ThreadingBase.h" />
     <ClInclude Include="Trials\Trial1.h" />
+    <ClInclude Include="Trials\Trial2.h" />
     <ClInclude Include="View\EmployeeView.h" />
     <ClInclude Include="View\IView.h" />
   </ItemGroup>
@@ -228,6 +229,7 @@
     </ClCompile>
     <ClCompile Include="Tools\Database.cpp" />
     <ClCompile Include="Trials\Trial1.cpp" />
+    <ClCompile Include="Trials\Trial2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MvcMfcDestopApp.rc" />
